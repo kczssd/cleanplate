@@ -5,37 +5,51 @@
         </div>
         <main>
             <ul>
-                <li>
+                <li v-for="(item, index) in toplist" :key="index">
                     <div>
-                        <img :src="WinImgs[0]" class="winner" />
-                        <span class="rank">1</span>
-                        <span class="name">郑志宇</span>
+                        <img :src="handleImg(index)" class="winner" />
+                        <span class="rank">{{ index + 1 }}</span>
+                        <span class="name">{{ item.name }}</span>
                     </div>
                     <div class="balence-count">
                         <img :src="GrainImg" />
-                        <span class="count">299</span>
+                        <span class="count">{{ item.rice }}</span>
                     </div>
                 </li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
             </ul>
         </main>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: 'toplist',
         data() {
             return {
                 GrainImg: require('@/assets/img/grain.png'),
                 WinImgs: [require('@/assets/img/first.png'), require('@/assets/img/second.png'), require('@/assets/img/third.png')],
+                toplist: null,
             };
+        },
+        methods: {
+            handleImg(index) {
+                switch (true) {
+                    case index < 5:
+                        return this.WinImgs[0];
+                    case index < 10:
+                        return this.WinImgs[1];
+                    default:
+                        return this.WinImgs[2];
+                }
+            },
+        },
+        mounted: function () {
+            axios.get('/host/toplist').then((res) => {
+                if (res.data.status == 10000) {
+                    this.toplist = res.data.properties;
+                }
+            });
         },
     };
 </script>

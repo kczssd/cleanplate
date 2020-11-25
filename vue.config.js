@@ -24,5 +24,17 @@ module.exports = {
                 ]
             }
         }
+    },
+    devServer: {
+        proxy: {
+            '/host': {
+                target: 'http://47.110.77.252:8080/',
+                changeOrigin: true,
+                secure: false,
+                pathRewrite: {
+                    '^/host': '/host'
+                }
+            }
+        },
     }
 }

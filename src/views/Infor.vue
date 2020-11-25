@@ -7,7 +7,7 @@
                 <img :src="ToplistSrcs[indexImg]" />
                 <span :style="!indexImg ? 'color:#909090' : 'color:#e2b26e'">排行榜</span>
             </div>
-            <div class="myinfor" @click="indexImg = 0">
+            <div class="myinfors" @click="indexImg = 0">
                 <img :src="MySrcs[indexImg]" />
                 <span :style="indexImg ? 'color:#909090' : 'color:#e2b26e'">我的</span>
             </div>
@@ -41,13 +41,13 @@ footer {
     height: 154px;
     background-color: #fff;
     box-shadow: 0 -2px 12px #f6f6f6;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     display: flex;
     justify-content: space-between;
     z-index: 1000;
     .toplist,
-    .myinfor {
+    .myinfors {
         width: 262px;
         height: inherit;
         display: flex;
